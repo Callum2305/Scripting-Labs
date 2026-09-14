@@ -1,0 +1,32 @@
+#run this in terminal to use, and execute with ping_sweep
+ping_sweep() {
+  subnet="172.17.0"
+  for i in {1..10}; do
+    ip="$subnet.$i"
+    (ping -c1 -W1 $ip &>/dev/null && echo "[+] $ip alive") &
+  done
+  wait
+}
+
+--------My Output----------
+[1] 8293
+[2] 8294
+[3] 8295
+[4] 8297
+[5] 8300
+[6] 8301
+[7] 8302
+[8] 8303
+[9] 8308
+[10] 8310
+[+] 172.17.0.1 alive
+[1]   Done                    ( ping -c1 -W1 $ip &> /dev/null && echo "[+] $ip alive" )
+[2]   Exit 1                  ( ping -c1 -W1 $ip &> /dev/null && echo "[+] $ip alive" )
+[3]   Exit 1                  ( ping -c1 -W1 $ip &> /dev/null && echo "[+] $ip alive" )
+[4]   Exit 1                  ( ping -c1 -W1 $ip &> /dev/null && echo "[+] $ip alive" )
+[6]   Exit 1                  ( ping -c1 -W1 $ip &> /dev/null && echo "[+] $ip alive" )
+[7]   Exit 1                  ( ping -c1 -W1 $ip &> /dev/null && echo "[+] $ip alive" )
+[5]   Exit 1                  ( ping -c1 -W1 $ip &> /dev/null && echo "[+] $ip alive" )
+[8]   Exit 1                  ( ping -c1 -W1 $ip &> /dev/null && echo "[+] $ip alive" )
+[9]-  Exit 1                  ( ping -c1 -W1 $ip &> /dev/null && echo "[+] $ip alive" )
+[10]+  Exit 1                  ( ping -c1 -W1 $ip &> /dev/null && echo "[+] $ip alive" )

@@ -1,0 +1,64 @@
+Run this python script and record outputs:
+    import requests
+    r = requests.get("http://scanme.nmap.org", timeout=5)
+    print("Status:", r.status_code)
+    print("Final URL:", r.url)
+    print("Server header:", r.headers.get("Server"))
+    print("Content-Type:", r.headers.get("Content-Type"))
+    print("First 200 chars of body:\\n", r.text[:200].replace('\n','\\n'))
+
+Outputs:
+
+Status: 200
+Final URL: http://scanme.nmap.org/
+Server header: Apache/2.4.7 (Ubuntu)
+Content-Type: text/html
+First 200 chars of body:\n <!DOCTYPE html>\n<html lang="en">\n<head>\n<title>Go ahead and ScanMe!</title>\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<meta name="theme-color" content="#2A0D45">\n<link rel="p
+
+What to look for:
+
+    Compare the Status and Final URL with the curl results. requests follows redirects by default; curl -I does not unless you use -L.
+    The Server header in Python should match the curl output; mismatches indicate different server behavior depending on client.
+    The start of the body helps confirm the page content and encoding.
+
+Questions to answer in phase1_notes.txt:
+
+    Did requests and curl report the same status and server header?
+        For status it just showed 200 when I ran the request file, where as curl shows HTTP/1.1 200 OK 
+        For header, it was the same and showed Apache/2.4.7 (Ubuntu)
+
+    If different, what header or other factor might explain it (redirects, default headers, user agent)?
+        Headers are basically similar, just return different snippits of the same information depending on protocols.
+
+Run this in terminal:   curl -i  -A "MyTestAgent/1.0" https://httpbin.org/headers
+                        curl -i  https://httpbin.org/headers
+
+What to look for:
+
+    Some servers change behavior based on the User-Agent. They may block, redirect, or return different content-lengths.
+    Web application firewalls or simple server rules sometimes detect known scanning agents and respond differently.
+    
+HTTP/2 503 
+server: awselb/2.0
+date: Mon, 03 Nov 2025 15:50:25 GMT
+content-type: text/html
+content-length: 162
+
+<html>
+<head><title>503 Service Temporarily Unavailable</title></head>
+<body>
+<center><h1>503 Service Temporarily Unavailable</h1></center>
+</body>
+</html>
+HTTP/2 503 
+server: awselb/2.0
+date: Mon, 03 Nov 2025 15:50:25 GMT
+content-type: text/html
+content-length: 162
+
+<html>
+<head><title>503 Service Temporarily Unavailable</title></head>
+<body>
+<center><h1>503 Service Temporarily Unavailable</h1></center>
+</body>
+</html>

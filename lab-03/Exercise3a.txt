@@ -1,0 +1,37 @@
+#Modify ping sweep to allow me to type a subnet prefix and use that one in the script:
+
+echo "Enter asubnet prefix: "
+read subnet
+ping_sweep() {
+  for i in {1..10}; do
+    ip="$subnet.$i"
+    (ping -c1 -W1 $ip &>/dev/null && echo "[+] $ip alive") &
+  done
+  wait
+}
+
+#ran in terminal with ping_sweep
+Mind you as soon as i pasted script into the terminal, and cliked enter, it immediatly asked me for an input, I typed it, and it didnt output anything until i ran the code
+--------Output--------------
+
+@Callum-Matthews2 ➜ /workspaces/lab-03 (main) $ ping_sweep
+[1] 12046
+[2] 12047
+[3] 12048
+[4] 12049
+[5] 12053
+[6] 12055
+[7] 12058
+[8] 12059
+[9] 12060
+[10] 12061
+[1]   Exit 1                  ( ping -c1 -W1 $ip &> /dev/null && echo "[+] $ip alive" )
+[2]   Exit 1                  ( ping -c1 -W1 $ip &> /dev/null && echo "[+] $ip alive" )
+[5]   Exit 1                  ( ping -c1 -W1 $ip &> /dev/null && echo "[+] $ip alive" )
+[3]   Exit 1                  ( ping -c1 -W1 $ip &> /dev/null && echo "[+] $ip alive" )
+[7]   Exit 1                  ( ping -c1 -W1 $ip &> /dev/null && echo "[+] $ip alive" )
+[9]-  Exit 1                  ( ping -c1 -W1 $ip &> /dev/null && echo "[+] $ip alive" )
+[4]   Exit 1                  ( ping -c1 -W1 $ip &> /dev/null && echo "[+] $ip alive" )
+[6]   Exit 1                  ( ping -c1 -W1 $ip &> /dev/null && echo "[+] $ip alive" )
+[8]-  Exit 1                  ( ping -c1 -W1 $ip &> /dev/null && echo "[+] $ip alive" )
+[10]+  Exit 1                  ( ping -c1 -W1 $ip &> /dev/null && echo "[+] $ip alive" )

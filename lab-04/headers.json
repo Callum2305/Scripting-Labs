@@ -1,0 +1,10 @@
+[
+  {
+    "url": "http://example.com",
+    "status": 200,
+    "final_url": "http://example.com/",
+    "server": null,
+    "content_type": "text/html",
+    "content_length": "363"
+  }
+]

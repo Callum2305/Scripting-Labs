@@ -1,0 +1,57 @@
+Paste into terminal: curl -I http://scanme.nmap.org
+
+Questions to answer in phase1_notes.txt:
+
+    What status line did you get and what does it mean?
+        HTTP/1.1 200 OK So the connection is ok and request succeeded.
+
+    What is the Server header value? Is it specific (nginx/1.22) or generic?
+        Apache/2.4.7 (Ubuntu)
+
+Paste into terminal:
+    curl http://scanme.nmap.org-o scanme.html
+    head -n 40 scanme.html
+
+Questions to answer in phase1_notes.txt:
+
+    What is the <title> of the page (if present)?
+        Go ahead and ScanMe!
+
+    Do you see any <form> elements? What are their action attributes (copy them)?
+    Not with the exact code:
+    But when I ran this: curl -i http://scanme.nmap.org
+    I got:
+        <form class="nst-search" id="nst-foot-search" action="/search/"> Action atribute is search.
+
+Part 3:
+Questions to answer in phase1_notes.txt:
+
+    Did requests and curl report the same status and server header?
+        For status it just showed 200 when I ran the request file, where as curl shows HTTP/1.1 200 OK 
+        For header, it was the same and showed Apache/2.4.7 (Ubuntu)
+
+    If different, what header or other factor might explain it (redirects, default headers, user agent)?
+        Headers are basically similar, just return different snippits of the same information depending on protocols.
+
+Part 4:
+Questions to answer in phase1_notes.txt:
+
+    Did the response change (status, server header, content-length) when the User-Agent was MyTestAgent/1.0?
+        The server changed, the titles all showed error code 503: Service Temporarily Unavailable.
+
+    If it had changed, what could that mean about the server’s defenses?
+        It was an irregular request that they have set up to block or deny.
+
+Step 5 — Short synthesis
+
+Open phase1_notes.txt and append a 4–6 line summary answering:
+
+    What three pieces of information from the steps above would be most useful in a reconnaissance report, and why?
+        1) Deferent outputs or things available through different user-agents. Some pages would becoe blocked.
+        2) You can see the exect server used through the server header, so you could plan exploits based off this.
+        3) What version of HTTP is used.
+
+    One quick defensive suggestion an admin could use to reduce information leakage from headers.
+        Hide server headers and http version if possible.
+
+End of Phase 1. Save all files into your lab folder — these will be referenced in later labs.

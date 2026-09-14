@@ -1,0 +1,50 @@
+Outputs of phase 2 part 1 using lab4-1_get.py with different web addresses:
+Note different Status Codes:
+
+HTTP VERSIONS:
+@Callum-Matthews2 ➜ /workspaces/lab-04 (main) $ python3 lab4-1_get.py "http://scanme.nmap.org"
+[+] URL: http://scanme.nmap.org
+    Status Code: 200
+    Final URL:   http://scanme.nmap.org/
+    Content-Type: text/html
+    Server:       Apache/2.4.7 (Ubuntu)
+    Content-Length: 2068
+
+
+@Callum-Matthews2 ➜ /workspaces/lab-04 (main) $ python3 lab4-1_get.py "http://example.org"
+[+] URL: http://example.org
+    Status Code: 200
+    Final URL:   http://example.org/
+    Content-Type: text/html
+    Server:       N/A
+    Content-Length: 363
+
+
+@Callum-Matthews2 ➜ /workspaces/lab-04 (main) $ python3 lab4-1_get.py "http://httpbin.org"
+[+] URL: http://httpbin.org
+    Status Code: 503
+    Final URL:   http://httpbin.org/
+    Content-Type: text/html
+    Server:       awselb/2.0
+    Content-Length: 162
+
+HTTPS VERSIONS:
+@Callum-Matthews2 ➜ /workspaces/lab-04 (main) $ python3 lab4-1_get.py "https://scanme.nmap.org"
+[!] Request error for https://scanme.nmap.org: HTTPSConnectionPool(host='scanme.nmap.org', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x760f5f350650>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+
+
+@Callum-Matthews2 ➜ /workspaces/lab-04 (main) $ python3 lab4-1_get.py "https://example.org"
+[+] URL: https://example.org
+    Status Code: 200
+    Final URL:   https://example.org/
+    Content-Type: text/html
+    Server:       N/A
+    Content-Length: 363
+
+
+@Callum-Matthews2 ➜ /workspaces/lab-04 (main) $ python3 lab4-1_get.py "https://httpbin.org"
+[!] Request error for https://httpbin.org: HTTPSConnectionPool(host='httpbin.org', port=443): Read timed out. (read timeout=5)
+
+None active websites have no server headers as not online.
+Different status Codes
+Some of them dont have a https versions 
